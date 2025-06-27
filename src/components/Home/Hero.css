@@ -1,0 +1,500 @@
+.Hero {
+	height: 100vh;
+	background-image: url('../../assets/img/homeBg.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+	max-height: 100vh;
+	overflow: hidden;
+}
+
+.heroContent {
+	display: flex;
+	height: 100%;
+	justify-content: space-between;
+}
+
+.carouselCards {
+	display: flex;
+	align-items: end;
+	justify-content: end;
+
+	height: 100%;
+	width: 100%;
+	flex-shrink: 0;
+}
+
+.carousel {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: end;
+	position: relative;
+	background-image: url('../../assets/img/Gradient.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	max-width: 1470px;
+}
+
+.heroScrollContainer::-webkit-scrollbar {
+	display: none;
+}
+
+.heroCard {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	align-items: center;
+	position: relative;
+	justify-content: end;
+	padding: 0px 16px;
+	width: 295px;
+}
+
+.heroCardImage {
+	position: absolute;
+	bottom: -5px;
+	right: 50%;
+	transform: translate(50%, 0);
+}
+
+.heroCardImage img {
+	height: 100%;
+	transition: width 0.4s ease;
+	width: 330px;
+}
+
+.heroCardContent {
+	width: 295px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	border-radius: 16px;
+	background: rgba(46, 53, 57, 0.5);
+	backdrop-filter: blur(6.25px);
+	flex-shrink: 0;
+	padding: 16px;
+	position: relative;
+	top: -100px;
+	opacity: 0;
+}
+
+.heroCardTitles {
+	padding: 0px 24px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.heroCardName {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	color: #fff;
+	font-family: 'Open Sans';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 20px; /* 125% */
+	text-transform: capitalize;
+}
+
+.heroCardSubtitle {
+	color: #fff;
+	font-family: 'Open Sans';
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 14px; /* 100% */
+}
+
+.heroCardText {
+	color: #fff;
+	text-align: center;
+	font-family: 'Open Sans';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 20.8px; /* 130% */
+}
+
+.heroRight {
+	height: 100%;
+	justify-content: center;
+	gap: 53px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0px 64px 0px 40px;
+}
+
+.heroTexts {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.heroTitle {
+	color: #fff;
+	text-shadow: 0px 1px 2px #000;
+	font-family: Inter;
+	font-size: 46.125px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 50.4px; /* 109.268% */
+	text-transform: uppercase;
+	width: 330px;
+}
+
+.heroText {
+	color: #fff;
+	text-shadow: 0px 1px 2px #000;
+	font-family: 'Open Sans';
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 27px; /* 150% */
+	width: 345px;
+}
+
+.heroButtons {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	align-items: center;
+}
+
+.heroGoggleBtn {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	border: none;
+
+	color: #fff;
+	text-align: center;
+	font-family: 'Open Sans';
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 18px; /* 100% */
+	box-shadow: 0px 0px 14px 0px rgba(239, 239, 242, 0.1);
+	border-radius: 25px;
+	background: #ffffff1a;
+	backdrop-filter: blur(6.25px);
+	height: 50px;
+	width: 320px;
+
+	transition: all 0.5s ease-in-out;
+	position: relative;
+}
+
+.heroGoggleBtn:hover {
+	background: #fff3;
+}
+
+.heroButtonsText {
+	color: #fff;
+	text-align: center;
+	font-family: 'Open Sans';
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 21px; /* 150% */
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.line {
+	height: 1px;
+	background: #c0c0c0;
+	width: 121.59px;
+}
+
+.heroButtonsBottom {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	align-items: center;
+	width: min-content;
+}
+
+.heroEmailBtn {
+	width: 320px;
+	color: #000;
+	text-align: center;
+	font-family: 'Open Sans';
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 18px; /* 100% */
+	border-radius: 25px;
+	background: #efeff2;
+	box-shadow: 0px 0px 14px 0px #efeff2;
+	padding: 16px 40px;
+	border: none;
+	cursor: pointer;
+	transition: all 0.5s ease-in-out;
+}
+
+.heroEmailBtn:hover {
+	box-shadow: 0px 0px 20px 6px rgba(239, 239, 242, 0.75);
+}
+
+.heroBtnsBotText {
+	color: rgba(255, 255, 255, 0.5);
+	text-align: center;
+	font-family: 'Open Sans';
+	font-size: 10px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 15px; /* 150% */
+	width: 100%;
+}
+
+.carouselDots {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+	gap: 10px;
+	position: absolute;
+	z-index: 23;
+	bottom: 64px;
+}
+
+.dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background-color: #aaa;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.dot.active {
+	background-color: #ff4bd8;
+}
+
+.carousel {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	position: relative;
+}
+
+.carouselCards {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.card {
+	margin: 0 -10px;
+	transform: scale(1);
+	transition: all 0.5s ease;
+	pointer-events: none;
+	mix-blend-mode: luminosity;
+}
+
+.card.side {
+	opacity: 1;
+	transform: scale(1);
+	pointer-events: auto;
+}
+
+.card.active {
+	mix-blend-mode: normal;
+	opacity: 1;
+	z-index: 10;
+	pointer-events: auto;
+	position: relative;
+}
+
+.card.active .heroCardContent {
+	opacity: 1;
+}
+
+.card.active .heroCardImage img {
+	width: 412px;
+}
+
+.card.hidden {
+	display: none;
+}
+
+.carouselScrollWrapper {
+	width: 100%;
+	scroll-snap-type: x mandatory;
+	display: flex;
+	justify-content: center;
+	scrollbar-width: none;
+}
+
+@media (max-width: 1350px) {
+	.card.active .heroCardImage img {
+		width: 390px;
+	}
+
+	.carousel {
+		width: 60%;
+	}
+
+	.card {
+		margin: 0 -20px;
+	}
+}
+
+@media (max-width: 1280px) {
+	.heroTitle {
+		font-size: 40px;
+		width: 300px;
+	}
+
+	.heroText {
+		font-size: 16px;
+	}
+
+	.card {
+		margin: 0 -35px;
+	}
+}
+
+@media (max-width: 1024px) {
+	.carousel {
+		width: 390px;
+		overflow: hidden;
+		background-image: none;
+	}
+
+	.card {
+		margin: 0 100px;
+	}
+
+	.heroCardContent {
+		width: 270px;
+	}
+
+	.carouselScrollWrapper {
+		padding-left: 20px;
+	}
+
+	.heroCardImage {
+		bottom: -15px;
+	}
+}
+
+@media (max-width: 768px) {
+	.carousel {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+
+	.heroContent {
+		position: relative;
+		justify-content: center;
+	}
+
+	.heroRight {
+		position: relative;
+		z-index: 20;
+		padding: 32px;
+		justify-content: space-between;
+		box-sizing: border-box;
+		pointer-events: none;
+	}
+
+	.carouselDots {
+		bottom: 251px;
+	}
+
+	.heroCardContent {
+		background: none;
+		backdrop-filter: none;
+		width: 100%;
+	}
+
+	.heroCardTitles {
+		align-items: center;
+		gap: 32px;
+		width: max-content;
+		position: absolute;
+		right: 53%;
+		transform: translate(50%, 0);
+		padding: 0;
+	}
+
+	.heroCardText {
+		display: none;
+	}
+
+	.heroCardContent {
+		top: -278px;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.card {
+		width: 100%;
+	}
+
+	.heroButtons {
+		pointer-events: all;
+	}
+
+	.card {
+		margin: 0;
+	}
+
+	.carouselScrollWrapper {
+		display: flex;
+		padding-left: 0;
+		box-sizing: content-box;
+	}
+
+	.card {
+		flex: 0 0 80%;
+		scroll-snap-align: start;
+	}
+
+	.heroCardImage {
+		right: 0px;
+	}
+
+	.heroCardImage img {
+		width: 390px;
+	}
+}
+
+@media (max-width: 640px) {
+	.card {
+		flex: 0 0 100%;
+	}
+
+	.heroCardImage {
+		right: 50px;
+		pointer-events: none;
+	}
+
+	.carousel {
+		pointer-events: none;
+	}
+
+	.carouselDots {
+		pointer-events: all;
+	}
+
+	.heroTitle {
+		font-size: 38px;
+	}
+
+	.heroButtonsBottom {
+		gap: 16px;
+	}
+}

@@ -474,7 +474,7 @@
 
 @media (max-width: 640px) {
 	.card {
-		flex: 0 0 100%;
+		flex: 0 0 100%; /*fffff*/
 	}
 
 	.heroCardImage {

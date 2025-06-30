@@ -1,6 +1,6 @@
 .Hero {
 	height: 100vh;
-	background-image: url('../../assets/img/homeBg.png');
+	background-image: url('../../assets/img/Back.png');
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	justify-content: space-between;
@@ -64,6 +64,7 @@
 	height: 100%;
 	transition: width 0.4s ease;
 	width: 330px;
+	pointer-events: none;
 }
 
 .heroCardContent {
@@ -235,7 +236,7 @@
 	border-radius: 25px;
 	background: #efeff2;
 	box-shadow: 0px 0px 14px 0px #efeff2;
-	padding: 16px 40px;
+	padding: 16px 0px;
 	border: none;
 	cursor: pointer;
 	transition: all 0.5s ease-in-out;
@@ -256,28 +257,53 @@
 	width: 100%;
 }
 
-.carouselDots {
-	display: flex;
-	justify-content: center;
-	margin-top: 20px;
-	gap: 10px;
-	position: absolute;
-	z-index: 23;
-	bottom: 64px;
+.swiper-pagination {
+	display: flex !important;
+	justify-content: center !important;
+	margin-top: 20px !important;
+	position: absolute !important;
+	z-index: 23 !important;
+	bottom: 64px !important;
 }
 
-.dot {
-	width: 12px;
-	height: 12px;
+.swiper-slide {
+	height: 100%;
+	display: flex !important;
+	align-items: end;
+}
+
+.swiper-slide.active {
+	z-index: 24;
+	mix-blend-mode: normal !important;
+	opacity: 1;
+}
+
+.swiper-slide.inactive {
+	z-index: 4;
+	mix-blend-mode: luminosity !important;
+	opacity: 0.4;
+}
+
+.carouselCards {
+	background-color: transparent;
+}
+
+.swiper-pagination-bullet {
+	width: 12px !important;
+	height: 12px !important;
 	border-radius: 50%;
-	background-color: #aaa;
+	opacity: 0.2;
+	background: #fff !important;
 	border: none;
 	cursor: pointer;
-	transition: background-color 0.3s;
+	box-shadow: 0px 0px 0px 0px #bebeca;
+	transition: all 0.3s;
 }
 
-.dot.active {
-	background-color: #ff4bd8;
+.swiper-pagination-bullet-active {
+	opacity: 1;
+	box-shadow: 0px 0px 7px 0px #bebeca;
+	background: #fff;
 }
 
 .carousel {
@@ -295,17 +321,9 @@
 }
 
 .card {
-	margin: 0 -10px;
-	transform: scale(1);
 	transition: all 0.5s ease;
 	pointer-events: none;
 	mix-blend-mode: luminosity;
-}
-
-.card.side {
-	opacity: 1;
-	transform: scale(1);
-	pointer-events: auto;
 }
 
 .card.active {
@@ -314,6 +332,18 @@
 	z-index: 10;
 	pointer-events: auto;
 	position: relative;
+	mix-blend-mode: luminosity !important;
+}
+
+.card.inactive {
+	mix-blend-mode: luminosity !important;
+	transition: all 0.3s ease;
+}
+
+.card.active {
+	mix-blend-mode: normal !important;
+	opacity: 1;
+	z-index: 20;
 }
 
 .card.active .heroCardContent {
@@ -324,16 +354,8 @@
 	width: 412px;
 }
 
-.card.hidden {
-	display: none;
-}
-
-.carouselScrollWrapper {
-	width: 100%;
-	scroll-snap-type: x mandatory;
-	display: flex;
-	justify-content: center;
-	scrollbar-width: none;
+.carouselCards {
+	width: 900px;
 }
 
 @media (max-width: 1350px) {
@@ -345,8 +367,8 @@
 		width: 60%;
 	}
 
-	.card {
-		margin: 0 -20px;
+	.carouselCards {
+		width: 100%;
 	}
 }
 
@@ -361,11 +383,28 @@
 	}
 
 	.card {
-		margin: 0 -35px;
+		margin: 0 -50px;
+	}
+
+	.swiper-slide.active {
+		justify-content: center;
 	}
 }
 
 @media (max-width: 1024px) {
+	.Hero {
+		background: linear-gradient(
+				5deg,
+				rgba(0, 0, 0, 0.33) 5.72%,
+				rgba(0, 0, 0, 0) 88.45%
+			),
+			radial-gradient(
+				123.29% 128.86% at 120.68% -16.03%,
+				#368b97 0%,
+				rgba(32, 2, 6, 0.06) 73.24%
+			),
+			url('../../assets/img/Back.png');
+	}
 	.carousel {
 		width: 390px;
 		overflow: hidden;
@@ -380,16 +419,15 @@
 		width: 270px;
 	}
 
-	.carouselScrollWrapper {
-		padding-left: 20px;
-	}
-
 	.heroCardImage {
 		bottom: -15px;
 	}
 }
 
 @media (max-width: 768px) {
+	.heroTexts {
+		pointer-events: none;
+	}
 	.carousel {
 		position: absolute;
 		width: 100%;
@@ -410,8 +448,9 @@
 		pointer-events: none;
 	}
 
-	.carouselDots {
-		bottom: 251px;
+	.swiper-pagination {
+		bottom: 251px !important;
+		pointer-events: all;
 	}
 
 	.heroCardContent {
@@ -474,7 +513,7 @@
 
 @media (max-width: 640px) {
 	.card {
-		flex: 0 0 100%; /*fffff*/
+		flex: 0 0 100%;
 	}
 
 	.heroCardImage {

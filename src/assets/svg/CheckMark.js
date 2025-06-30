@@ -12,9 +12,9 @@ function CheckMark({ className }) {
 			<path
 				d='M3 7.5L5.5 9.5L10 4.5'
 				stroke='white'
-				stroke-width='2'
-				stroke-linecap='round'
-				stroke-linejoin='round'
+				strokeWidth='2'
+				strokeLinecap='round'
+				strokeLinejoin='round'
 			/>
 		</svg>
 	)

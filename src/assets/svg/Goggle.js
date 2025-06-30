@@ -11,7 +11,7 @@ function Goggle({ className }) {
 			<g clip-path='url(#clip0_3_60)'>
 				<mask
 					id='mask0_3_60'
-					maskType='luminance'
+					masktype='luminance'
 					maskUnits='userSpaceOnUse'
 					x='0'
 					y='0'

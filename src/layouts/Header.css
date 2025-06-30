@@ -77,6 +77,21 @@
 	display: none;
 }
 
+.headerLinkTitle.activeMobil,
+.headerLinkTitle.active {
+	background: #ff3153;
+	border: 1px solid #ff3153;
+}
+
+.headerLinkTitle.activeMobil:hover {
+	box-shadow: none;
+}
+
+.headerLinkTitle.active:hover {
+	background: #ffffff1a;
+	box-shadow: 0 0 24px 10px #ffffff40;
+}
+
 @media (max-width: 1024px) {
 	.header {
 		padding: 24px;

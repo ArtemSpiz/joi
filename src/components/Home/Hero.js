@@ -2,11 +2,16 @@ import './Hero.css'
 import Header from '../../layouts/Header'
 
 import CheckMark from '../../assets/svg/CheckMark'
-import Goggle from '../../assets/svg/Goggle'
 import girl1 from '../../assets/img/girl1.png'
 import girl3 from '../../assets/img/girl3.png'
 import girl4 from '../../assets/img/girl4.png'
 import { useEffect, useRef, useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import GoggleBtn from '../../ui/GoggleBtn'
 
 const GirlCard = [
 	{
@@ -39,45 +44,67 @@ const GirlCard = [
 	},
 ]
 
-function Hero() {
-	const scrollRef = useRef(null)
-	const [activeIndex, setActiveIndex] = useState(1)
+const loopedCards = [...GirlCard, ...GirlCard, ...GirlCard]
+const MIDDLE_INDEX = GirlCard.length
 
-	const loopedCards = [GirlCard[GirlCard.length - 1], ...GirlCard, GirlCard[0]]
+function Hero() {
+	const [activeIndex, setActiveIndex] = useState(0)
+	const scrollRef = useRef(null)
+	const cardWidth = 300
+
+	const swiperRef = useRef(null)
 
 	useEffect(() => {
-		const interval = setInterval(() => {
-			setActiveIndex(prevIndex => prevIndex + 1)
-		}, 20000000)
-		return () => clearInterval(interval)
+		if (swiperRef.current && swiperRef.current.swiper) {
+			swiperRef.current.swiper.update()
+		}
+	}, [])
+	const handleSlideChange = swiper => {
+		setActiveIndex(swiper.realIndex)
+	}
+
+	const centerScroll = index => {
+		if (!scrollRef.current) return
+		const scrollTo =
+			index * cardWidth - scrollRef.current.offsetWidth / 2 + cardWidth / 2
+		scrollRef.current.scrollTo({
+			left: scrollTo,
+			behavior: 'smooth',
+		})
+	}
+
+	useEffect(() => {
+		const el = scrollRef.current
+		if (!el) return
+
+		const onScroll = () => {
+			const scrollLeft = el.scrollLeft
+			const center = scrollLeft + el.offsetWidth / 2
+			const index = Math.round(center / cardWidth)
+			const normalizedIndex = index % GirlCard.length
+			setActiveIndex((normalizedIndex + GirlCard.length) % GirlCard.length)
+
+			if (
+				index < GirlCard.length ||
+				index >= loopedCards.length - GirlCard.length
+			) {
+				const newScroll =
+					(MIDDLE_INDEX + normalizedIndex) * cardWidth -
+					el.offsetWidth / 2 +
+					cardWidth / 2
+				requestAnimationFrame(() => {
+					el.scrollLeft = newScroll
+				})
+			}
+		}
+
+		el.addEventListener('scroll', onScroll)
+		return () => el.removeEventListener('scroll', onScroll)
 	}, [])
 
 	useEffect(() => {
-		const cardWidth = 320 + 40
-
-		if (scrollRef.current) {
-			scrollRef.current.scrollTo({
-				left: activeIndex * cardWidth,
-				behavior: 'smooth',
-			})
-		}
-	}, [activeIndex])
-
-	const handleTransitionEnd = () => {
-		if (activeIndex === loopedCards.length - 1) {
-			scrollRef.current.scrollTo({
-				left: 1 * (320 + 40),
-				behavior: 'auto',
-			})
-			setActiveIndex(1)
-		} else if (activeIndex === 0) {
-			scrollRef.current.scrollTo({
-				left: GirlCard.length * (320 + 40),
-				behavior: 'auto',
-			})
-			setActiveIndex(GirlCard.length)
-		}
-	}
+		centerScroll(GirlCard.length + activeIndex)
+	}, [])
 
 	return (
 		<div className='Hero'>
@@ -85,23 +112,31 @@ function Hero() {
 
 			<div className='heroContent'>
 				<div className='carousel'>
-					<div
-						className='carouselScrollWrapper'
-						ref={scrollRef}
-						onTransitionEnd={handleTransitionEnd}
+					<Swiper
+						ref={swiperRef}
+						modules={[Navigation, Pagination, Autoplay]}
+						onSlideChange={handleSlideChange}
+						loop={true}
+						centeredSlides={true}
+						slidesPerView={3}
+						autoplay={{ delay: 10000 }}
+						pagination={{ clickable: true }}
+						className='carouselCards'
+						breakpoints={{
+							0: { slidesPerView: 1 },
+							786: { slidesPerView: 1 },
+							1280: { slidesPerView: 3 },
+						}}
 					>
-						<div className='carouselCards'>
-							{loopedCards.map((card, index) => {
-								let className = 'card'
-								if (index === activeIndex) className += ' active'
-								else if (index === activeIndex - 1 || index === activeIndex + 1)
-									className += ' side'
-								else className += ' hidden'
-
-								return (
-									<div className={className} key={index}>
+						{GirlCard.map((card, index) => (
+							<SwiperSlide
+								key={index}
+								className={activeIndex === index ? 'active' : 'inactive'}
+							>
+								{({ isActive }) => (
+									<div className={`card ${isActive ? 'active' : 'inactive'}`}>
 										<div className='heroCardImage'>
-											<img src={card.image} alt='girl' />
+											<img src={card.image} alt={card.name} />
 										</div>
 										<div className='heroCardContent'>
 											<div className='heroCardTitles'>
@@ -114,19 +149,10 @@ function Hero() {
 											<div className='heroCardText'>{card.text}</div>
 										</div>
 									</div>
-								)
-							})}
-						</div>
-					</div>
-					<div className='carouselDots'>
-						{GirlCard.map((_, i) => (
-							<button
-								key={i}
-								className={`dot ${i + 1 === activeIndex ? 'active' : ''}`}
-								onClick={() => setActiveIndex(i + 1)}
-							/>
+								)}
+							</SwiperSlide>
 						))}
-					</div>
+					</Swiper>
 				</div>
 
 				<div className='heroRight'>
@@ -139,17 +165,17 @@ function Hero() {
 					</div>
 
 					<div className='heroButtons'>
-						<button className='heroGoggleBtn'>
-							<Goggle className={`heroGoggle`} />
-							Sign in with Google
-						</button>
+						<GoggleBtn className={'heroGoggleBtn'} />
+
 						<div className='heroButtonsText'>
 							<div className='line'></div>
 							<span>or</span>
 							<div className='line'></div>
 						</div>
 						<div className='heroButtonsBottom'>
-							<button className='heroEmailBtn'>Continue with Email</button>
+							<a className='heroEmailBtn' href='/signup'>
+								Continue with Email
+							</a>
 							<div className='heroBtnsBotText'>
 								By signing up you agree to our Terms & Conditions and Privacy
 								Policy, and confirm that you are at least 18 years old.

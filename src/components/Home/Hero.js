@@ -119,6 +119,7 @@ function Hero() {
 						loop={true}
 						centeredSlides={true}
 						slidesPerView={3}
+						initialSlide={GirlCard.length}
 						autoplay={{ delay: 10000 }}
 						pagination={{ clickable: true }}
 						className='carouselCards'

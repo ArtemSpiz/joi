@@ -15,9 +15,53 @@ function SignUp() {
 		email: '',
 		password: '',
 		name: '',
+		identity: '',
 	})
 
 	const [showPassword, setShowPassword] = useState(false)
+
+	const getClickIdFromCookies = () => {
+		const match = document.cookie.match(/rtkclickid-store=([^;]+)/)
+		return match ? match[1] : null
+	}
+
+	const submitAccount = async () => {
+		const clickId = getClickIdFromCookies()
+		if (!clickId) {
+			alert('Click ID not found in cookies.')
+			return
+		}
+
+		const utm = JSON.parse(localStorage.getItem('utm_data') || '{}')
+
+		try {
+			const response = await fetch('https://swipey.ai/api/v1/auth/pre-lander', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'x-api-key': '3b6b40c8-8b6d-4094-8e67-93fc80ae99cb',
+				},
+				body: JSON.stringify({
+					email,
+					password,
+					clickId,
+					...utm,
+				}),
+			})
+
+			const data = await response.json()
+
+			if (data.success && data.loginUrl) {
+				const redirectUrl = new URL(data.loginUrl)
+				window.location.href = redirectUrl.toString()
+			} else {
+				alert(data.message || 'Something went wrong.')
+			}
+		} catch (error) {
+			console.error('API error:', error)
+			alert('Failed to create account.')
+		}
+	}
 
 	const handleSubmit = e => {
 		e.preventDefault()
@@ -41,8 +85,13 @@ function SignUp() {
 
 		setErrors(newErrors)
 
-		if (!newErrors.email && !newErrors.password && !newErrors.name) {
-			console.log('Logging in...', { email, password, name })
+		if (
+			!newErrors.email &&
+			!newErrors.password &&
+			!newErrors.name &&
+			!newErrors.identity
+		) {
+			submitAccount()
 		}
 	}
 
@@ -180,11 +229,17 @@ function SignUp() {
 							</div>
 
 							<div className='signUpAnother'>
-								<a className='signUpForgot' href='/recovery-password'>
+								<a
+									className='signUpForgot'
+									href='http://swipey.ai/?open_modal=reset-password'
+								>
 									Forgot password?
 								</a>
 								<div className='signUpCircle'></div>
-								<a className='signUpCreate' href='/signin'>
+								<a
+									className='signUpCreate'
+									href='http://swipey.ai/?open_modal=sign-in '
+								>
 									Log in for JOI AI
 								</a>
 							</div>

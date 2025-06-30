@@ -38,7 +38,7 @@ const LinksText = [
 	},
 	{
 		title: 'Sign In',
-		href: '/signin',
+		href: 'http://swipey.ai/?open_modal=sign-in ',
 	},
 ]
 

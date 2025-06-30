@@ -32,9 +32,12 @@
 	align-items: center;
 	justify-content: end;
 	position: relative;
-	background-image: url('../../assets/img/Gradient.png');
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
+	background: radial-gradient(
+		55.24% 80.8% at 45.31% 80.22%,
+		#2b2752 0%,
+		rgba(54, 139, 151, 0)
+	);
+
 	max-width: 1470px;
 }
 
@@ -400,7 +403,7 @@
 			),
 			radial-gradient(
 				123.29% 128.86% at 120.68% -16.03%,
-				#368b97 0%,
+				#2b2752 0%,
 				rgba(32, 2, 6, 0.06) 73.24%
 			),
 			url('../../assets/img/Back.png');

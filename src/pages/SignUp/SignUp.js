@@ -236,10 +236,7 @@ function SignUp() {
 									Forgot password?
 								</a>
 								<div className='signUpCircle'></div>
-								<a
-									className='signUpCreate'
-									href='http://swipey.ai/?open_modal=sign-in '
-								>
+								<a className='signUpCreate' href='/signin '>
 									Log in for JOI AI
 								</a>
 							</div>
